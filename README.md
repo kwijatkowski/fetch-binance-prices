@@ -1,28 +1,6 @@
-# Fetch all transactions from the XRP ledger
+# Fetch all price data from Binance api and put into BigQuery
 
-This code allows you to fetc all transactions from the XRP ledger and insert them into Google BigQuery. 
-
-# The data is already READY TO USE 🎉!
-
-The data is already available in a **PUBLIC dataset** at Google BigQuery in:
-
-```
-xrpledgerdata.fullhistory.transactions
-```
-
-So a working sample query with some stats would be:
-
-```
-SELECT 
-  COUNT(1) as TxCount,
-  MIN(LedgerIndex) as MinLedger,
-  MAX(LedgerIndex) as MaxLedger,
-  COUNT(DISTINCT LedgerIndex) as LedgersWithTxCount
-FROM 
-  xrpledgerdata.fullhistory.transactions
-```
-
-Starting Sept. 27 2018 the dataset will be backfilled from a [full history rippled node](https://twitter.com/WietseWind/status/1027957804429193216). Once up to date, I'll run a service that will add all new transactions to the dataset as well.
+This code allows you to fetch price data from Binance api and put into BigQuery
 
 # Run and insert into your own Google BigQuery project
 
@@ -59,17 +37,14 @@ export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"
 More information:
 https://cloud.google.com/docs/authentication/getting-started
 
-> Now modify `schema.js` (line 1-3) to point to your own projectId, dataset and table.
+> Now modify `config.js` to configure your BigQuery connection and set what data you want to fetch. This is the only file which needs to be modified to download price data for asset of choice
 
 # Create schema
 
-Run `node applySchema.js`
+Run `node applySchema.js` This will create table for you. Table name is determined based on `config.js` file. BigQuery project and dataset needs to be created in advance.
 
-**WARNING!** If an existing table exists, the table, schema and data will be **REMOVED**!
+**WARNING!** If table you want to create already exists, the table, schema and data will be **REMOVED**!
 
 # Insert data
 
-You can invoke the script from a node enabled environment by setting these environment variables:
-
-- `NODE`: the rippled node (`wss://...`) to connect to, default: **wss://s2.ripple.com**
-- `LEDGER`: the ledger index to start fetching transactions from, default: **32570**
+You can invoke the script from a node enabled environment. If you are running Windows it will be probably required to run Node.js command promot in administrator mode, so it is able to read your environment variables and access BigQuery credentials

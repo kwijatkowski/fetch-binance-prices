@@ -1,16 +1,15 @@
 {
-  "name": "fetch-xrpl-transactions",
+  "name": "fetch-binance-prices",
   "version": "0.9.0",
-  "description": "Fetch XRPL transactions and store in Google BigQuery",
+  "description": "Fetch binance prices into Google BigQuery",
   "main": "./index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/WietseWind/fetch-xrpl-transactions.git"
   },
   "keywords": [
-    "xrp",
-    "xrpl",
-    "transactions",
+    "binance",
+    "prices",
     "bigquery"
   ],
   "author": "WietseWind",
@@ -21,7 +20,8 @@
   "homepage": "https://github.com/WietseWind/fetch-xrpl-transactions",
   "dependencies": {
     "@google-cloud/bigquery": "^1.3.0",
-    "rippled-ws-client": "^1.0.0"
+    "axios": "^0.19.0",
+    "node-binance-api": "^0.9.2"
   },
   "scripts": {
     "start": "node index.js"

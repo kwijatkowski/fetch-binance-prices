@@ -1,4 +1,10 @@
-const { schema, projectId, datasetName, tableName, CurrencyFields } = require('./schema')
+
+const { schema, projectId, datasetName, tableName } = require('./binanceSchema');
+
+console.log('Applying schema..');
+console.log('projectId: ' + projectId);
+console.log('datasetName: ' + datasetName);
+console.log('tableName: ' + tableName);
 
 const BigQuery = require('@google-cloud/bigquery')
 const bigquery = new BigQuery({ projectId: projectId })
