@@ -3,7 +3,7 @@ const binance = require('./binancePricesProvider');
 const log = require('./log');
 const config = require('./config.js');
 const BigQuery = require('@google-cloud/bigquery')
-const bigquery = new BigQuery({ projectId: projectId, keyFilename: './updateBinancePricesBigQuery/credentials.json' })
+const bigquery = new BigQuery({ projectId: projectId, keyFilename: credentialsFilePath })
 
 //https://api.binance.com/api/v1/klines?symbol=BTCUSDT&interval=1d&startTime=1514764800000&endTime=1546300800000
 

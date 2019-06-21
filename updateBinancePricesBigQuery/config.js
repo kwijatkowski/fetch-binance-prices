@@ -20,6 +20,7 @@ var projectId = 'binancefetcher';
 var retryTimeout = 60 * 60 * 12;
 var debug = false;
 var timeInterval = utils.binanceIntervalToMs(interval);
+var credentialsFilePath = './updateBinancePricesBigQuery/credentials.json';
 
 module.exports = {
     pair: pair,
@@ -32,5 +33,6 @@ module.exports = {
     datasetName: datasetName,
     tableName: pair + interval, // 'XRPUSDT1h',
     debug : debug,
-    timeInterval : timeInterval
+    timeInterval : timeInterval,
+    credentialsFilePath : credentialsFilePath
 }
