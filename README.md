@@ -48,3 +48,7 @@ Run `node applySchema.js` This will create table for you. Table name is determin
 # Insert data
 
 You can invoke the script from a node enabled environment. If you are running Windows it will be probably required to run Node.js command promot in administrator mode, so it is able to read your environment variables and access BigQuery credentials
+
+# Running on the cloud
+
+Project is ready to be run as an Azure Function. All you need to do is to deploy it. I found it easy to do using Azure Functions extension for Visual Studio Code
