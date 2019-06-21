@@ -1,29 +1,13 @@
 {
-  "name": "fetch-binance-prices",
-  "version": "0.9.0",
-  "description": "Fetch binance prices into Google BigQuery",
-  "main": "./index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/WietseWind/fetch-xrpl-transactions.git"
-  },
-  "keywords": [
-    "binance",
-    "prices",
-    "bigquery"
-  ],
-  "author": "WietseWind",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/WietseWind/fetch-xrpl-transactions/issues"
-  },
-  "homepage": "https://github.com/WietseWind/fetch-xrpl-transactions",
-  "dependencies": {
-    "@google-cloud/bigquery": "^1.3.0",
-    "axios": "^0.19.0",
-    "node-binance-api": "^0.9.2"
-  },
+  "name": "fetch-binance-prices-azure-function",
+  "version": "1.0.0",
+  "description": "",
   "scripts": {
     "start": "node index.js"
-  }
+  },
+  "dependencies": {
+    "@google-cloud/bigquery": "^1.3.0",
+    "node-binance-api": "^0.9.2"
+  },
+  "devDependencies": {}
 }

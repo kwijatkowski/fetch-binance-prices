@@ -3,12 +3,13 @@ const binance = require('./binancePricesProvider');
 const log = require('./log');
 const config = require('./config.js');
 const BigQuery = require('@google-cloud/bigquery')
-const bigquery = new BigQuery({ projectId: projectId })
+const bigquery = new BigQuery({ projectId: projectId, keyFilename: './updateBinancePricesBigQuery/credentials.json' })
 
 //https://api.binance.com/api/v1/klines?symbol=BTCUSDT&interval=1d&startTime=1514764800000&endTime=1546300800000
 
 //checking last data in BigQuery
 const checkLastSynchronized = (config) => {
+  log.info("Checking last synchronized data...");
   return new Promise((resolve, reject) => {
     //check if we need to update or synchronize fully
     bigquery.query({
@@ -28,11 +29,16 @@ const checkLastSynchronized = (config) => {
         log.info("Table " + config.tableName + " empty, starting full synchronization");
       }
 
-      // log.debug("Config updated by checkLastSynchronized: ");
-      // log.debug(config);
+      log.debug("Config updated by checkLastSynchronized: ");
+      log.debug(config);
       resolve(config); //we will just continue here
-    });
-  })
+    })
+      .catch((error) => {
+        log.debug("exception occured");
+        log.debug(error);
+        reject(error);
+      });
+  });
 };
 
 //fetching binance prices
@@ -44,7 +50,7 @@ const fetch = (conf) => {
     if (endTime > conf.tEnd)
       endTime = conf.tEnd;
 
-    binance.getPriceData(conf.pair, conf.interval, conf.tStart,endTime)
+    binance.getPriceData(conf.pair, conf.interval, conf.tStart, endTime)
       .then((candles) => {
         log.debug("Candles in fetch " + candles.length);
         resolve({
@@ -107,10 +113,22 @@ const run = (conf) => {
   });
 };
 
-log.info('Pushing binance prices into Google BigQuery...');
-log.info('Settings: ');
-log.info(config);
-//actual entry point
-checkLastSynchronized(config).then((updatedConfig) => {
-  run(updatedConfig);
-});
+module.exports = async function (context) {
+   context.log('log anything');
+  log.setContext(context);
+  log.info(typeof(context));
+  log.info('Starting my azure function...');
+  // var promise = new Promise((resolve, reject) => {
+  
+    //actual entry point
+    await checkLastSynchronized(config).then((updatedConfig) => {
+      log.info('Pushing binance prices into Google BigQuery...');
+      log.info('Settings: ');
+      log.info(config);
+      run(updatedConfig);
+    }).catch((err) => {
+      log.error(err);
+    });
+    log.info('Azure function end...');
+  // });
+};
