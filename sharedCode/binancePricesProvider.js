@@ -1,7 +1,7 @@
 const axios = require('axios');
 const instance = axios.create({
     baseURL: 'https://api.binance.com',
-    timeout: 1000,
+    timeout: 10000,
 });
 
 const log = require('./log');
