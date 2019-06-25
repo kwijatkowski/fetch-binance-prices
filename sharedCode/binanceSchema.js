@@ -1,4 +1,4 @@
-const conf = require('./config');
+const conf = require('../updateBinancePrices1d/config1d');
 
 /**
  * BigQuery Schema;

@@ -1,12 +1,17 @@
-const conf = require('./config.js');
+// const conf = require('./config.js');
 
 module.exports = {
 
-    context: null,
-
-    setContext: (context) => {
+    init : (config,context) => {
+        this.conf = config;
         this.context = context;
     },
+
+    context: this.context,
+
+    // setContext: (context) => {
+    //     this.context = context;
+    // },
 
     info: (msg) => {
         console.log(msg)
@@ -16,7 +21,7 @@ module.exports = {
         }
     },
     debug: (msg) => {
-        if (!conf.debug)
+        if (!this.conf.debug)
             return;
 
         console.log(msg);

@@ -37,11 +37,11 @@ export GOOGLE_APPLICATION_CREDENTIALS="/home/user/Downloads/[FILE_NAME].json"
 More information:
 https://cloud.google.com/docs/authentication/getting-started
 
-> Now modify `config.js` to configure your BigQuery connection and set what data you want to fetch. This is the only file which needs to be modified to download price data for asset of choice
+> Now modify `config{timeframe}.js` to configure your BigQuery connection and set what data you want to fetch. This is the only file which needs to be modified to download price data for asset of choice
 
 # Create schema
 
-Run `node applySchema.js` This will create table for you. Table name is determined based on `config.js` file. BigQuery project and dataset needs to be created in advance.
+Run `node applySchema.js` This will create table for you. Table name is determined based on `config{timeframe}.js` file. BigQuery project and dataset needs to be created in advance.
 
 **WARNING!** If table you want to create already exists, the table, schema and data will be **REMOVED**!
 
@@ -51,4 +51,4 @@ You can invoke the script from a node enabled environment. If you are running Wi
 
 # Running on the cloud
 
-Project is ready to be run as an Azure Function. All you need to do is to deploy it. I found it easy to do using Azure Functions extension for Visual Studio Code
+Project is ready to be run as an Azure Functions. All you need to do is to deploy it. I found it easy to do using Azure Functions extension for Visual Studio Code. Each funciton is stored in 'updateBinancePrices{timeframe}' directory and will be executed independently, therefore separate configuration files are provided.

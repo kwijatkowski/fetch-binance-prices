@@ -1,4 +1,4 @@
-const utils = require('./utils');
+const utils = require('../sharedCode/utils');
 
 //this is the only place where you need to configure
 
@@ -20,7 +20,7 @@ var projectId = 'binancefetcher';
 var retryTimeout = 60 * 60 * 12;
 var debug = false;
 var timeInterval = utils.binanceIntervalToMs(interval);
-var credentialsFilePath = './updateBinancePricesBigQuery/credentials.json';
+var credentialsFilePath = './sharedCode/credentials.json';
 
 module.exports = {
     pair: pair,
